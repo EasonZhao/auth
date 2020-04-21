@@ -17,11 +17,11 @@ var (
 
 // Model 基类
 type Model struct {
-	ID       uint      `gorm:"primary_key" json:"id"`
-	CreateAt time.Time `json:"created_at"`
-	UpdateAt time.Time `json:"update_at"`
-	// * 代表 NULL
-	DeleteAt *time.Time `json:"delete_at"`
+	ID        uint      `gorm:"primary_key" json:"id"`
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at "`
+	// * 代表 null
+	DeletedAt *time.Time `json:"deleted_at"`
 }
 
 // Setup 初始化

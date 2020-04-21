@@ -6,8 +6,6 @@ import (
 	"github.com/securityin/auth/pkg/setting"
 	"github.com/securityin/auth/routers/api"
 	v1 "github.com/securityin/auth/routers/api/v1"
-	ginSwagger "github.com/swaggo/gin-swagger"
-	"github.com/swaggo/gin-swagger/swaggerFiles"
 )
 
 // InitRouter 返回 框架的实例 包含中间件 配置
@@ -53,7 +51,7 @@ func InitRouter() *gin.Engine {
 
 	}
 
-	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	//r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	return r
 }

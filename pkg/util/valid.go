@@ -7,7 +7,7 @@ import (
 
 	"github.com/go-playground/locales/zh"
 	ut "github.com/go-playground/universal-translator"
-	"github.com/sun-wenming/gin-auth/pkg/logging"
+	"github.com/securityin/auth/pkg/logging"
 	"gopkg.in/go-playground/validator.v9"
 	zh_translations "gopkg.in/go-playground/validator.v9/translations/zh"
 )

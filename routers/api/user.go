@@ -35,6 +35,7 @@ func Register(c *gin.Context) {
 	}
 	// 验证
 	validate := util.GetValidate()
+
 	err := validate.Struct(mAuth)
 	if err != nil {
 		appG.ResponseFailValidParam(err)
