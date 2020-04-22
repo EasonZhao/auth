@@ -2,6 +2,7 @@ package routers
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/securityin/auth/middleware/captcha"
 	"github.com/securityin/auth/middleware/jwt"
 	"github.com/securityin/auth/pkg/setting"
 	"github.com/securityin/auth/routers/api"
@@ -19,8 +20,12 @@ func InitRouter() *gin.Engine {
 	// 根目录
 	root := r.Group("")
 	{
+		root.POST("/captcha", api.GetCaptcha)
+		root.GET("/captcha/:captchaId", api.GetCaptchaImage)
 		// 用户账号
 		auth := root.Group("/auth")
+
+		auth.Use(captcha.Captcha())
 		{
 			auth.POST("/register", api.Register)
 			auth.POST("/login", api.Login)

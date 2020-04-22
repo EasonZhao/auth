@@ -2,7 +2,6 @@ package userser
 
 import (
 	"encoding/json"
-	"fmt"
 
 	"github.com/securityin/auth/models/users"
 	"github.com/securityin/auth/pkg/e"
@@ -151,7 +150,7 @@ func existUserInfo(userID uint) util.Error {
 func GetCacheCode(phone string) string {
 	cache := caches.Phone{Phone: phone}
 	key := cache.GetPhoneCodeKey()
-	fmt.Println(key)
+
 	if !gredis.Exists(key) {
 		return ""
 	}

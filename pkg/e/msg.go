@@ -6,13 +6,13 @@ const (
 	ErrorInvalidParamsWithoutToken = 401
 	ErrorInvalidParams             = 400
 
-	// 认证
+	// ErrorAuthParseTokenFail 认证
 	ErrorAuthParseTokenFail = iota + 20001
 	ErrorAuthCheckTokenTimeout
 	ErrorAuthGenerateToken
 	ErrorAuthToken
 
-	// --- 客户端错误
+	// ErrorUserGetInfo --- 客户端错误
 	ErrorUserGetInfo = iota + 40001
 	ErrorUserGetLogin
 	ErrorUserRegName
@@ -26,9 +26,11 @@ const (
 	ErrorUserInfoEmpty
 	ErrorUserLoginEmpty
 	ErrorUserPwd
+	ErrorUserCaptchaMissing
+	ErrorUserCaptcha
 	// --- end
 
-	// --- 服务器错误
+	// ErrorExecSql --- 服务器错误
 	ErrorExecSql = iota + 50001
 	ErrorPasswordEncrypt
 	ErrorUserInfoCreate
@@ -54,18 +56,20 @@ var MsgFlags = map[int]string{
 	ErrorAuthToken:             "Token错误",
 	// --- end
 
-	ErrorUserGetInfo:       "获取到用户失败.",
-	ErrorUserGetLogin:      "获取到帐户失败.",
-	ErrorUserRegName:       "用户名输入格式错误.",
-	ErrorUserNameExist:     "用户名已存在.",
-	ErrorPhoneNotValid:     "手机号验证失败.",
-	ErrorPhoneCodeSend:     "验证码发送失败.",
-	ErrorPhoneCodeExpired:  "验证码已过期.",
-	ErrorPhoneCodeNotValid: "验证码验证失败.",
-	ErrorUserNameNotExist:  "用户名不存在.",
-	ErrorUserInfoEmpty:     "用户不存在.",
-	ErrorUserLoginEmpty:    "帐户不存在.",
-	ErrorUserPwd:           "密码错误.",
+	ErrorUserGetInfo:        "获取到用户失败.",
+	ErrorUserGetLogin:       "获取到帐户失败.",
+	ErrorUserRegName:        "用户名输入格式错误.",
+	ErrorUserNameExist:      "用户名已存在.",
+	ErrorPhoneNotValid:      "手机号验证失败.",
+	ErrorPhoneCodeSend:      "验证码发送失败.",
+	ErrorPhoneCodeExpired:   "验证码已过期.",
+	ErrorPhoneCodeNotValid:  "验证码验证失败.",
+	ErrorUserNameNotExist:   "用户名不存在.",
+	ErrorUserInfoEmpty:      "用户不存在.",
+	ErrorUserLoginEmpty:     "帐户不存在.",
+	ErrorUserPwd:            "密码错误.",
+	ErrorUserCaptchaMissing: "验证码缺失.",
+	ErrorUserCaptcha:        "验证码错误.",
 
 	// --- 服务器错误
 	ErrorPasswordEncrypt: "密码加密失败.",
