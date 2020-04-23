@@ -88,7 +88,7 @@ func (u *User) GetUserInfo() (*users.User, util.Error) {
 }
 
 // SendCode 发送手机验证码
-func SendCode(phone string) (string, util.Error) {
+func SendCode(phone string) util.Error {
 	var (
 		code string
 		err  error
@@ -103,16 +103,20 @@ func SendCode(phone string) (string, util.Error) {
 	key := cache.GetPhoneCodeKey()
 
 	// 发送验证码操作
+	if err = util.SendCodeByAli(phone, code); err != nil {
+		logging.GetLogger().Error(err)
+		return util.ErrNewCode(e.ErrorOauthState)
+	}
 	// 十分钟验证码缓存
 	if err := gredis.Set(key, code, 600); err != nil {
 		logging.GetLogger().Warn(caches.ErrorSet, err)
 	}
 	if err != nil {
 		logging.GetLogger().Error(err)
-		return "", util.ErrNewCode(e.ErrorPhoneCodeNotValid)
+		return util.ErrNewCode(e.ErrorPhoneCodeNotValid)
 	}
 	// 便于测试，code返回出去
-	return code, nil
+	return nil
 }
 
 func (u *User) getUserLoginInfo() (*users.UserLogin, util.Error) {
@@ -162,6 +166,21 @@ func GetCacheCode(phone string) string {
 	}
 	json.Unmarshal(data, &code)
 	return code
+}
+
+// DelCacheCode 删除缓存的验证码
+func DelCacheCode(phone string) {
+	cache := caches.Phone{Phone: phone}
+	key := cache.GetPhoneCodeKey()
+
+	if !gredis.Exists(key) {
+		logging.GetLogger().Warn("缓存不存在")
+		return
+	}
+	_, err := gredis.Delete(key)
+	if err != nil {
+		logging.GetLogger().Warn(caches.ErrorGet, err)
+	}
 }
 
 // ExistByUserName 是否存在用户账号

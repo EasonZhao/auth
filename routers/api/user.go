@@ -162,6 +162,9 @@ func PhoneLogin(c *gin.Context) {
 		return
 	}
 
+	// 删除验证码
+	userser.DelCacheCode(mAuth.Phone)
+
 	userService := userser.User{UserName: mAuth.Phone, Code: mAuth.Code}
 
 	// 判断是否存在
@@ -199,16 +202,15 @@ func PhoneLogin(c *gin.Context) {
 func SendCode(c *gin.Context) {
 	appG := app.GetGin(c)
 	phone := c.PostForm("phone")
-	code, err := userser.SendCode(phone)
 	if !util.RegPhone(phone) {
 		appG.ResponseFailErrCode(e.ErrorPhoneNotValid)
 		return
 	}
-
+	err := userser.SendCode(phone)
 	if err != nil {
 		appG.ResponseFailError(err)
 	}
-	appG.ResponseSuc(code)
+	appG.ResponseSuc(nil)
 }
 
 // GetUserInfo 获取用户信息
