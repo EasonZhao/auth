@@ -32,5 +32,7 @@ func main() {
 		MaxHeaderBytes: 1 << 20,
 	}
 
-	server.ListenAndServe()
+	if err = server.ListenAndServe(); err != nil {
+		logging.GetLogger().Fatalln(err)
+	}
 }

@@ -24,7 +24,6 @@ func InitRouter() *gin.Engine {
 		root.GET("/captcha/:captchaId", api.GetCaptchaImage)
 		// 用户账号
 		auth := root.Group("/auth")
-
 		auth.Use(captcha.Captcha())
 		{
 			auth.POST("/register", api.Register)
@@ -32,7 +31,7 @@ func InitRouter() *gin.Engine {
 			auth.POST("/code", api.SendCode)
 
 		}
-		auth.POST("/phonelogin", api.PhoneLogin)
+		root.POST("/auth/phonelogin", api.PhoneLogin)
 		// 用户账号
 		oauth := root.Group("/oauth")
 		{

@@ -162,9 +162,6 @@ func PhoneLogin(c *gin.Context) {
 		return
 	}
 
-	// 删除验证码
-	userser.DelCacheCode(mAuth.Phone)
-
 	userService := userser.User{UserName: mAuth.Phone, Code: mAuth.Code}
 
 	// 判断是否存在
@@ -180,6 +177,9 @@ func PhoneLogin(c *gin.Context) {
 			return
 		}
 	}
+
+	// 删除验证码
+	userser.DelCacheCode(mAuth.Phone)
 
 	// 登录 make token
 	token, err := util.GenerateToken(mAuth.Phone)
