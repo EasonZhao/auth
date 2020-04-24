@@ -11,7 +11,8 @@ BINARY_UNIX=$(BINARY_NAME)_unix
 .PHONY: all build help
 
 build:
-	swag init
+	#swag init
+	$(GOCMD) mod tidy
 	$(GOBUILD) -v .
 
 help:

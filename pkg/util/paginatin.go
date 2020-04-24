@@ -3,7 +3,7 @@ package util
 import (
 	"github.com/securityin/auth/pkg/setting"
 
-	"github.com/Unknwon/com"
+	"github.com/unknwon/com"
 	"github.com/gin-gonic/gin"
 )
 
