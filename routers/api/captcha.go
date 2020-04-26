@@ -20,11 +20,11 @@ const (
 // GetCaptcha 获取验证码
 // @Summary 获取验证码
 // @accept application/x-www-form-urlencoded
-// @Security ApiKeyAuth
-// @Tags user
-// @Produce  json
-// @Success 200 {object} users.User
-// @Router /auth/captcha [post]
+// @Tags captcha
+// @Produce json
+// @Success 200 {string} json "{"ID":"验证码ID","CaptchaURL":"访问路径"}"
+// @Failure 204 {string} json "{"code":204,"data":null,"msg":"错误信息"}"
+// @Router /captcha [post]
 func GetCaptcha(c *gin.Context) {
 	appG := app.GetGin(c)
 	captchaID := captcha.NewLen(CaptchaLen)
@@ -39,14 +39,13 @@ func GetCaptcha(c *gin.Context) {
 	appG.ResponseSuc(data)
 }
 
-// GetCaptchaImage 获取验证码
-// @Summary 获取验证码
+// GetCaptchaImage 获取验证码图片
+// @Summary 获取验证码图片
 // @accept application/x-www-form-urlencoded
-// @Security ApiKeyAuth
-// @Tags user
-// @Produce  json
-// @Success 200 {object} users.User
-// @Router /auth/captcha [post]
+// @Tags captcha
+// @Produce mage/png
+// @Success 200 {data} data "图片数据"
+// @Router /captcha/:captchaId [post]
 func GetCaptchaImage(c *gin.Context) {
 	//captchaID := c.Param("captchaId")
 	dir, file := path.Split(c.Request.URL.Path)
