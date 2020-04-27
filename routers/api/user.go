@@ -22,7 +22,7 @@ type auth struct {
 // @Tags auth
 // @Produce json
 // @Param auth body api.auth true "账号密码登录/注册"
-// @Success 200 {string} json "{"code":200,"data":{},"msg":"ok"}"
+// @Success 200 {body} string "{"code":200,"data":{},"msg":"ok"}"
 // @Router /auth/register [post]
 func Register(c *gin.Context) {
 	appG := app.GetGin(c)
@@ -78,8 +78,8 @@ func Register(c *gin.Context) {
 // @Tags auth
 // @Produce json
 // @Param auth body api.auth true "用户信息"
-// @Success 200 {string} json "{"code":200,"data":{},"msg":"ok"}"
-// @Failure 204 {string} json "{"code":200,"data":{},"msg":"ok"}"
+// @Success 200 {body} string "{"code":200,"data":{},"msg":"ok"}"
+// @Failure 204 {body} string "{"code":200,"data":{},"msg":"ok"}"
 // @Router /auth/login [post]
 func Login(c *gin.Context) {
 	appG := app.GetGin(c)
@@ -127,7 +127,7 @@ type phone struct {
 // @Tags auth
 // @Produce json
 // @Param auth body api.phone true "手机号快速登录/注册"
-// @Success 200 {string} json "{"code":200,"data":{"token":"令牌"},"msg":"ok"}"
+// @Success 200 {body} string "{"code":200,"data":{"token":"令牌"},"msg":"ok"}"
 // @Router /auth/phonelogin [post]
 func PhoneLogin(c *gin.Context) {
 	appG := app.GetGin(c)
@@ -199,7 +199,7 @@ func PhoneLogin(c *gin.Context) {
 // @Param id query string true "验证码ID"
 // @Param digist query string true "验证码内容"
 // @Param phone formData string true "手机号"
-// @Success 200 {body} json "{"code":200,"data":{},"msg":"ok"}"
+// @Success 200 {body} string "{"code":200,"data":{},"msg":"ok"}"
 // @Router /auth/code [post]
 func SendCode(c *gin.Context) {
 	appG := app.GetGin(c)

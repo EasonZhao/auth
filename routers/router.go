@@ -6,7 +6,6 @@ import (
 	"github.com/securityin/auth/middleware/jwt"
 	"github.com/securityin/auth/pkg/setting"
 	"github.com/securityin/auth/routers/api"
-	v1 "github.com/securityin/auth/routers/api/v1"
 
 	_ "github.com/securityin/auth/docs"
 	ginSwagger "github.com/swaggo/gin-swagger"
@@ -48,8 +47,6 @@ func InitRouter() *gin.Engine {
 
 		apiv1.Use(jwt.JWT())
 		{
-			apiv1.GET("/test", v1.TestAuth)
-
 			// 用户
 			user := apiv1.Group("/user")
 			{

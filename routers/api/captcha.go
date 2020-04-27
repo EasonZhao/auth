@@ -22,8 +22,8 @@ const (
 // @accept application/x-www-form-urlencoded
 // @Tags captcha
 // @Produce json
-// @Success 200 {string} json "{"ID":"验证码ID","CaptchaURL":"访问路径"}"
-// @Failure 204 {string} json "{"code":204,"data":null,"msg":"错误信息"}"
+// @Success 200 {body} string "{"ID":"验证码ID","CaptchaURL":"访问路径"}"
+// @Failure 204 {body} string "{"code":204,"data":null,"msg":"错误信息"}"
 // @Router /captcha [post]
 func GetCaptcha(c *gin.Context) {
 	appG := app.GetGin(c)
@@ -44,7 +44,7 @@ func GetCaptcha(c *gin.Context) {
 // @accept application/x-www-form-urlencoded
 // @Tags captcha
 // @Produce mage/png
-// @Success 200 {data} data "图片数据"
+// @Success 200 {body} string "图片数据"
 // @Router /captcha/:captchaId [post]
 func GetCaptchaImage(c *gin.Context) {
 	//captchaID := c.Param("captchaId")
